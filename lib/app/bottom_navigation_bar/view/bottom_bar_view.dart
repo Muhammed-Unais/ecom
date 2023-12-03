@@ -2,6 +2,7 @@ import 'package:ecom/app/bottom_navigation_bar/view_model/bottom_bar_view_model.
 import 'package:ecom/app/home/view/home_view.dart';
 import 'package:ecom/app/my_bag/view/my_bag_view.dart';
 import 'package:ecom/app/products_listing/view/products_view.dart';
+import 'package:ecom/app/saved_items/view/saved_item_view.dart';
 import 'package:ecom/res/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';  
@@ -19,7 +20,7 @@ class _BottomBarViewState extends State<BottomBarView> {
     const HomeView(),
     const ProductsView(),
     const MyBagView(),
-    const Text("Saved Item"),
+    const SavedItemView()
   ];
 
   @override
