@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:ecom/data/app_exception.dart';
 import 'package:ecom/data/network/base_network_api_service.dart';
+import 'package:ecom/res/constants/app_url.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 
@@ -12,7 +13,7 @@ class NetworkApiService implements BaseNetWorkApiService {
     Map<String, dynamic>? queryParameters,
   }) async {
     try {
-      var uri = Uri.http("", endPoint, queryParameters);
+      var uri = Uri.http(AppUrl.baseUrl, endPoint, queryParameters);
 
       Response? response = await http.get(
         uri,
@@ -33,7 +34,7 @@ class NetworkApiService implements BaseNetWorkApiService {
     Map<String, dynamic>? queryParameters,
   }) async {
     try {
-      var uri = Uri.http("", endPoint, queryParameters);
+      var uri = Uri.http(AppUrl.baseUrl, endPoint, queryParameters);
 
       Response? response = await http.post(
         uri,

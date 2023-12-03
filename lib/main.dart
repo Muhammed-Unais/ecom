@@ -1,11 +1,14 @@
 import 'package:ecom/app/bottom_navigation_bar/view/bottom_bar_view.dart';
 import 'package:ecom/app/bottom_navigation_bar/view_model/bottom_bar_view_model.dart';
+import 'package:ecom/app/home/view_model/home_view_model.dart';
 import 'package:ecom/res/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
+   WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
   runApp(
     MultiProvider(
       providers: [
@@ -13,13 +16,17 @@ void main() async {
           create: (context) {
             return BottomBarViewModel();
           },
+        ),
+        ChangeNotifierProvider(
+          create: (context) {
+            return HomeViewModel();
+          },
         )
       ],
       child: const MyApp(),
     ),
   );
-  WidgetsFlutterBinding.ensureInitialized();
-  await Hive.initFlutter();
+ 
 }
 
 class MyApp extends StatelessWidget {

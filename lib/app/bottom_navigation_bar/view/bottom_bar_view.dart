@@ -22,6 +22,7 @@ class _BottomBarViewState extends State<BottomBarView> {
 
   @override
   Widget build(BuildContext context) {
+   
     return Consumer<BottomBarViewModel>(
         builder: (context, bottombarProvider, _) {
       return Scaffold(

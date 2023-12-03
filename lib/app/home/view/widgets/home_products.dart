@@ -1,4 +1,4 @@
-import 'package:ecom/res/constants/widgets/product_card.dart';
+import 'package:ecom/res/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 
 class HomeProducts extends StatelessWidget {

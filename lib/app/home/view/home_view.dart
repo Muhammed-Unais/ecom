@@ -9,9 +9,7 @@ const tempcategoryImage =
     "https://images.pexels.com/photos/2905238/pexels-photo-2905238.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2";
 
 class HomeView extends StatelessWidget {
-  const HomeView({
-    super.key,
-  });
+  const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,5 +32,3 @@ class HomeView extends StatelessWidget {
     );
   }
 }
-
-
