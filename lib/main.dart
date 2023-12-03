@@ -21,19 +21,6 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         scaffoldBackgroundColor: AppColors.backgroundColor,
         primaryColor: AppColors.primarySeed,
-        appBarTheme: const AppBarTheme(
-          iconTheme: IconThemeData(
-            color: AppColors.primarySeed,
-          ),
-          backgroundColor: AppColors.backgroundColor,
-          centerTitle: true,
-          titleTextStyle: TextStyle(
-            color: AppColors.primarySeed,
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-          ),
-          elevation: 5,
-        ),
         iconTheme: const IconThemeData(
           color: AppColors.primarySeed,
         ),

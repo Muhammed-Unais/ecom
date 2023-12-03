@@ -11,6 +11,7 @@ class BottomBarView extends StatefulWidget {
 }
 
 class _BottomBarViewState extends State<BottomBarView> {
+
   List<Widget> screens = [
     const HomeView(),
     const Text("Products"),

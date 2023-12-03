@@ -1,5 +1,12 @@
-import 'package:ecom/res/constants/app_colors.dart';
+import 'package:ecom/app/home/view/widgets/home_appbar.dart';
+import 'package:ecom/app/home/view/widgets/home_banner_widget.dart';
+import 'package:ecom/app/home/view/widgets/home_categories_widget.dart';
+import 'package:ecom/app/home/view/widgets/home_products.dart';
+import 'package:ecom/app/home/view/widgets/home_products_explore_button.dart';
 import 'package:flutter/material.dart';
+
+const tempcategoryImage =
+    "https://images.pexels.com/photos/2905238/pexels-photo-2905238.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2";
 
 class HomeView extends StatelessWidget {
   const HomeView({
@@ -8,14 +15,24 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        elevation: 5,
-        backgroundColor: AppColors.backgroundColor,
-        surfaceTintColor: AppColors.backgroundColor,
-        title: const Text(""),
+      appBar: const HomeAppBar(),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            HomeCategoriesWidget(size: size),
+            const SizedBox(height: 20),
+            HomeBannerWidget(size: size),
+            const SizedBox(height: 20),
+            const HomeProductsExploreButton(),
+            const SizedBox(height: 15),
+            HomeProducts(size: size)
+          ],
+        ),
       ),
-      body: const Center(),
     );
   }
 }
+
+
