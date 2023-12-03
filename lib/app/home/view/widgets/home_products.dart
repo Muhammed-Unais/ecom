@@ -16,7 +16,6 @@ class HomeProducts extends StatelessWidget {
       child: ListView.builder(
         padding:const EdgeInsets.only(left: 16),
         itemCount: 4,
-        
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {

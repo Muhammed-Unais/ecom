@@ -56,8 +56,10 @@ class _HomeCategoriesWidgetState extends State<HomeCategoriesWidget> {
                 padding: const EdgeInsets.only(left: 16, top: 18),
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
-                itemCount: 4,
+                itemCount: response?.data?.categories.length,
                 itemBuilder: (context, index) {
+                  final categoriesElement = response?.data?.categories[index];
+                  final category = categoriesElement?.category;
                   return Padding(
                     padding: const EdgeInsets.only(right: 16),
                     child: SizedBox(
@@ -78,7 +80,7 @@ class _HomeCategoriesWidgetState extends State<HomeCategoriesWidget> {
                               ),
                               child: Center(
                                 child: Text(
-                                  "Category",
+                                  category?.name ??"category",
                                   style: GoogleFonts.rubik(
                                       fontSize: 12,
                                       fontWeight: FontWeight.w400,

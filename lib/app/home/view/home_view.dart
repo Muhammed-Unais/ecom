@@ -18,6 +18,7 @@ class HomeView extends StatelessWidget {
       appBar: const HomeAppBar(),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             HomeCategoriesWidget(size: size),
             const SizedBox(height: 20),

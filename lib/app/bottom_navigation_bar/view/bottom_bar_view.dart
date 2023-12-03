@@ -1,5 +1,6 @@
 import 'package:ecom/app/bottom_navigation_bar/view_model/bottom_bar_view_model.dart';
 import 'package:ecom/app/home/view/home_view.dart';
+import 'package:ecom/app/products_listing/view/products_view.dart';
 import 'package:ecom/res/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -15,7 +16,7 @@ class BottomBarView extends StatefulWidget {
 class _BottomBarViewState extends State<BottomBarView> {
   List<Widget> screens = [
     const HomeView(),
-    const Text("Products"),
+    const ProductsView(),
     const Text("My bag"),
     const Text("Saved Item"),
   ];
