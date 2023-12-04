@@ -1,6 +1,7 @@
 import 'package:ecom/app/bottom_navigation_bar/view/bottom_bar_view.dart';
 import 'package:ecom/app/bottom_navigation_bar/view_model/bottom_bar_view_model.dart';
 import 'package:ecom/app/home/view_model/home_view_model.dart';
+import 'package:ecom/app/my_bag/model/my_bag_model.dart';
 import 'package:ecom/app/products_listing/view_model/products_listing_view_model.dart';
 import 'package:ecom/app/saved_items/model/saveditem_model.dart';
 import 'package:ecom/app/saved_items/view_model/saved_items_view_model.dart';
@@ -18,6 +19,8 @@ void main() async {
   }
 
   await Hive.openBox<SavedItemModel>('savedItemDb');
+
+  await Hive.openBox<MyBagItemModel>('myBagItemDb');
 
   runApp(
     MultiProvider(
