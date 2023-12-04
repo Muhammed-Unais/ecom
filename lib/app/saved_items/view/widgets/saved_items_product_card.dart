@@ -1,6 +1,7 @@
-import 'package:ecom/app/home/view/home_view.dart';
 import 'package:ecom/res/constants/app_colors.dart';
+import 'package:ecom/res/constants/app_url.dart';
 import 'package:ecom/res/widgets/elavated_button_with_icon.dart';
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,9 +10,20 @@ class SavedItmeProductCard extends StatelessWidget {
   const SavedItmeProductCard({
     super.key,
     required this.size,
+    required this.productimageUrl,
+    required this.productName,
+    required this.productOldPrice,
+    required this.productPrice,
+    required this.discount, this.deleteonTap,
   });
 
   final Size size;
+  final String productimageUrl;
+  final String productName;
+  final String productOldPrice;
+  final String productPrice;
+  final String discount;
+  final void Function()? deleteonTap;
 
   @override
   Widget build(BuildContext context) {
@@ -25,22 +37,22 @@ class SavedItmeProductCard extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          deleteIcon(),
+          deleteIcon(onTap: deleteonTap),
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Row(
                 children: [
-                  cardProductImage(),
+                  cardProductImage(productimageUrl),
                   const SizedBox(width: 16),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      productName(),
+                      productNameWidget(productName),
                       const SizedBox(height: 10),
-                      productMrp(),
+                      productMrp(productOldPrice),
                       const SizedBox(height: 10),
-                      priceAndOffer(),
+                      priceAndOffer(productPrice, discount),
                       const SizedBox(height: 10),
                       sizeColorAndQuntity(),
                     ],
@@ -55,13 +67,16 @@ class SavedItmeProductCard extends StatelessWidget {
     );
   }
 
-  Flexible cardProductImage() {
+  Flexible cardProductImage(String imageUrl) {
     return Flexible(
-      child: Image.network(
-        tempcategoryImage,
-        fit: BoxFit.cover,
+      child: FancyShimmerImage(
+        imageUrl: AppUrl.productImageSchema + imageUrl,
         width: size.width * 0.26,
         height: size.height * 0.15,
+        boxFit: BoxFit.cover,
+        errorWidget: Image.asset(
+          "assets/images/no_image.jpg",
+        ),
       ),
     );
   }
@@ -79,9 +94,9 @@ class SavedItmeProductCard extends StatelessWidget {
     );
   }
 
-  Text productMrp() {
+  Text productMrp(String productOldPrice) {
     return Text(
-      '£60.00',
+      '£$productOldPrice',
       style: GoogleFonts.rubik(
         color: const Color(0xFF828282),
         fontSize: 14,
@@ -92,11 +107,11 @@ class SavedItmeProductCard extends StatelessWidget {
     );
   }
 
-  SizedBox productName() {
+  SizedBox productNameWidget(String productName) {
     return SizedBox(
       width: size.width * 0.5,
       child: Text(
-        "Men's Black The Ryuk Graphic Printed Oversized T-shirt",
+        productName,
         style: GoogleFonts.rubik(
           color: AppColors.primarySeed,
           fontSize: 11,
@@ -108,12 +123,12 @@ class SavedItmeProductCard extends StatelessWidget {
     );
   }
 
-  Positioned deleteIcon() {
+  Positioned deleteIcon({void Function()? onTap}) {
     return Positioned(
       right: 0,
       top: 0,
       child: GestureDetector(
-        onTap: () {},
+        onTap: onTap,
         child: SvgPicture.asset(
           "assets/svgs/delete_icon.svg",
           height: 24,
@@ -123,14 +138,14 @@ class SavedItmeProductCard extends StatelessWidget {
     );
   }
 
-  SizedBox priceAndOffer() {
+  SizedBox priceAndOffer(String productPrice, String discount) {
     return SizedBox(
       width: size.width * 0.5,
       child: Wrap(
         crossAxisAlignment: WrapCrossAlignment.center,
         children: [
           Text(
-            '£3999.95',
+            '£3$productPrice',
             style: GoogleFonts.rubik(
               color: AppColors.primarySeed,
               fontSize: 18,
@@ -141,15 +156,17 @@ class SavedItmeProductCard extends StatelessWidget {
           const SizedBox(
             width: 10,
           ),
-          Text(
-            '20% OFF',
-            style: GoogleFonts.rubik(
-              color: const Color(0xFF2F935F),
-              fontSize: 15,
-              fontWeight: FontWeight.w400,
-              height: 0,
-            ),
-          )
+          discount.contains("0|nil")
+              ? const SizedBox()
+              : Text(
+                  '$discount% OFF',
+                  style: GoogleFonts.rubik(
+                    color: const Color(0xFF2F935F),
+                    fontSize: 15,
+                    fontWeight: FontWeight.w400,
+                    height: 0,
+                  ),
+                )
         ],
       ),
     );

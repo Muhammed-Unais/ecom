@@ -3,7 +3,6 @@ import 'package:ecom/res/constants/app_colors.dart';
 import 'package:ecom/res/constants/app_url.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProductCard extends StatelessWidget {
@@ -11,20 +10,19 @@ class ProductCard extends StatelessWidget {
     super.key,
     required this.imageWidth,
     required this.cardWidth,
-    this.onTapWishlist,
     this.productImage = tempcategoryImage,
     required this.productName,
     required this.productPrice,
-    required this.imagehight,
+    required this.imagehight, required this.wishListIcon,
   });
 
   final double imageWidth;
   final double imagehight;
   final double cardWidth;
-  final void Function()? onTapWishlist;
   final String productImage;
   final String productName;
   final String productPrice;
+  final Widget wishListIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +37,7 @@ class ProductCard extends StatelessWidget {
               child: Stack(
                 children: [
                   FancyShimmerImage(
-                    imageUrl:AppUrl.productImageSchema+productImage,
+                    imageUrl: AppUrl.productImageSchema + productImage,
                     height: imagehight,
                     width: imageWidth,
                     boxFit: BoxFit.cover,
@@ -50,16 +48,7 @@ class ProductCard extends StatelessWidget {
                   Positioned(
                     right: 16,
                     top: 16,
-                    child: GestureDetector(
-                      onTap: onTapWishlist,
-                      child: SvgPicture.asset(
-                        "assets/svgs/favorite_icon.svg",
-                        colorFilter: const ColorFilter.mode(
-                          AppColors.primarySeed,
-                          BlendMode.srcIn,
-                        ),
-                      ),
-                    ),
+                    child: wishListIcon,
                   )
                 ],
               ),

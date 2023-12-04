@@ -1,6 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
-
-part 'saved_item_model.g.dart';
+part 'saveditem_model.g.dart';
 
 @HiveType(typeId: 1)
 class SavedItemModel {
@@ -20,6 +19,7 @@ class SavedItemModel {
   String rating;
   @HiveField(7)
   String image;
+ 
 
   SavedItemModel({
     required this.name,
@@ -31,6 +31,28 @@ class SavedItemModel {
     required this.rating,
     required this.image,
   });
+
+  SavedItemModel copyWith({
+    String? name,
+    String? appDescription,
+    String? stock,
+    String? oldprice,
+    String? price,
+    String? discount,
+    String? rating,
+    String? image,
+    String? code
+  }) =>
+      SavedItemModel(
+        name: name ?? this.name,
+        appDescription: appDescription ?? this.appDescription,
+        stock: stock ?? this.stock,
+        oldprice: oldprice ?? this.oldprice,
+        price: price ?? this.price,
+        discount: discount ?? this.discount,
+        rating: rating ?? this.rating,
+        image: image ?? this.image,
+      );
 
   factory SavedItemModel.fromMap(Map<String, dynamic> json) => SavedItemModel(
         name: json["name"],

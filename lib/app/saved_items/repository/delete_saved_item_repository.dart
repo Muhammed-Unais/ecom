@@ -1,15 +1,14 @@
 import 'package:ecom/app/saved_items/model/saveditem_model.dart';
 import 'package:ecom/data/local_storage/base_local_data_service.dart';
 
-class AddSavedProductRepository {
+class DeleteSavedItemRepository {
   final BaseLocalDataService<SavedItemModel> _baseLocalDataService;
 
-  AddSavedProductRepository(this._baseLocalDataService);
+  DeleteSavedItemRepository(this._baseLocalDataService);
 
-  Future<void> addSavedProduct(SavedItemModel singleProduct) async {
+  Future<void> deleteSavedItem(int index) async {
     try {
-      await _baseLocalDataService.postData(singleProduct,
-          dbName: "savedItemDb");
+      await _baseLocalDataService.deleteData(index, dbName: "savedItemDb");
     } catch (e) {
       rethrow;
     }

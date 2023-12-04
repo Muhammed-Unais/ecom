@@ -44,6 +44,7 @@ dependencies:
   json_annotation: ^4.8.1
   shimmer: ^3.0.0
   fancy_shimmer_image: ^2.0.2
+  hive_generator: ^2.0.1
 
 dev_dependencies:
   flutter_test:

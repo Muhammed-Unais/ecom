@@ -2,16 +2,18 @@ import 'dart:developer';
 import 'package:ecom/data/local_storage/base_local_data_service.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-class LocalDataService<T> implements BaseLocalDataService {
-  final locaDb = Hive.box<T>('task-model');
-
+class LocalDataService<T> implements BaseLocalDataService<T> {
   @override
-  Future<dynamic> getData() async {
+  List<T> getData({required String dbName}) {
+    final locaDb = Hive.box<T>(dbName);
+
     return locaDb.values.toList();
   }
 
   @override
-  Future<void> postData(model) async {
+  Future<void> postData(model,{required String dbName}) async {
+    final locaDb = Hive.box<T>(dbName);
+
     try {
       await locaDb.add(model);
     } catch (e) {
@@ -22,7 +24,9 @@ class LocalDataService<T> implements BaseLocalDataService {
   }
 
   @override
-  Future<void> putData(int index, model) async {
+  Future<void> putData(int index, model,{required String dbName}) async {
+    final locaDb = Hive.box<T>(dbName);
+
     try {
       locaDb.putAt(index, model);
     } catch (e) {
@@ -31,7 +35,9 @@ class LocalDataService<T> implements BaseLocalDataService {
   }
 
   @override
-  Future<void> deleteData(int index) async {
+  Future<void> deleteData(int index,{required String dbName}) async {
+    final locaDb = Hive.box<T>(dbName);
+
     try {
       locaDb.deleteAt(index);
     } catch (e) {
@@ -40,7 +46,9 @@ class LocalDataService<T> implements BaseLocalDataService {
   }
 
   @override
-  T? getAt(int index) {
+  T? getAt(int index,{required String dbName}) {
+    final locaDb = Hive.box<T>(dbName);
+
     return locaDb.getAt(index);
   }
 }

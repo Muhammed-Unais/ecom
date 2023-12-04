@@ -2,14 +2,23 @@ import 'package:ecom/app/bottom_navigation_bar/view/bottom_bar_view.dart';
 import 'package:ecom/app/bottom_navigation_bar/view_model/bottom_bar_view_model.dart';
 import 'package:ecom/app/home/view_model/home_view_model.dart';
 import 'package:ecom/app/products_listing/view_model/products_listing_view_model.dart';
+import 'package:ecom/app/saved_items/model/saveditem_model.dart';
+import 'package:ecom/app/saved_items/view_model/saved_items_view_model.dart';
 import 'package:ecom/res/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
-   WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
+
+  if (!Hive.isAdapterRegistered(SavedItemModelAdapter().typeId)) {
+    Hive.registerAdapter(SavedItemModelAdapter());
+  }
+
+  await Hive.openBox<SavedItemModel>('savedItemDb');
+
   runApp(
     MultiProvider(
       providers: [
@@ -27,12 +36,16 @@ void main() async {
           create: (context) {
             return ProductsListingViewModel();
           },
-        )
+        ),
+        ChangeNotifierProvider(
+          create: (context) {
+            return SavedItemViewModel();
+          },
+        ),
       ],
       child: const MyApp(),
     ),
   );
- 
 }
 
 class MyApp extends StatelessWidget {
