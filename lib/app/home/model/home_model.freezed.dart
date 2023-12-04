@@ -20,15 +20,11 @@ HomeModel _$HomeModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$HomeModel {
-  @JsonKey(name: "success")
   int get success => throw _privateConstructorUsedError;
-  @JsonKey(name: "message")
   String get message => throw _privateConstructorUsedError;
-  @JsonKey(name: "banner1")
   List<Banner1> get banner1 => throw _privateConstructorUsedError;
   @JsonKey(name: "best_seller")
   List<dynamic> get bestSeller => throw _privateConstructorUsedError;
-  @JsonKey(name: "categories")
   List<CategoryElement> get categories => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -43,11 +39,11 @@ abstract class $HomeModelCopyWith<$Res> {
       _$HomeModelCopyWithImpl<$Res, HomeModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: "success") int success,
-      @JsonKey(name: "message") String message,
-      @JsonKey(name: "banner1") List<Banner1> banner1,
+      {int success,
+      String message,
+      List<Banner1> banner1,
       @JsonKey(name: "best_seller") List<dynamic> bestSeller,
-      @JsonKey(name: "categories") List<CategoryElement> categories});
+      List<CategoryElement> categories});
 }
 
 /// @nodoc
@@ -103,11 +99,11 @@ abstract class _$$HomeModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: "success") int success,
-      @JsonKey(name: "message") String message,
-      @JsonKey(name: "banner1") List<Banner1> banner1,
+      {int success,
+      String message,
+      List<Banner1> banner1,
       @JsonKey(name: "best_seller") List<dynamic> bestSeller,
-      @JsonKey(name: "categories") List<CategoryElement> categories});
+      List<CategoryElement> categories});
 }
 
 /// @nodoc
@@ -156,11 +152,10 @@ class __$$HomeModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$HomeModelImpl implements _HomeModel {
   const _$HomeModelImpl(
-      {@JsonKey(name: "success") required this.success,
-      @JsonKey(name: "message") required this.message,
-      @JsonKey(name: "banner1") required final List<Banner1> banner1,
+      {required this.success,
+      required this.message,
+      required final List<Banner1> banner1,
       @JsonKey(name: "best_seller") required final List<dynamic> bestSeller,
-      @JsonKey(name: "categories")
       required final List<CategoryElement> categories})
       : _banner1 = banner1,
         _bestSeller = bestSeller,
@@ -170,14 +165,11 @@ class _$HomeModelImpl implements _HomeModel {
       _$$HomeModelImplFromJson(json);
 
   @override
-  @JsonKey(name: "success")
   final int success;
   @override
-  @JsonKey(name: "message")
   final String message;
   final List<Banner1> _banner1;
   @override
-  @JsonKey(name: "banner1")
   List<Banner1> get banner1 {
     if (_banner1 is EqualUnmodifiableListView) return _banner1;
     // ignore: implicit_dynamic_type
@@ -195,7 +187,6 @@ class _$HomeModelImpl implements _HomeModel {
 
   final List<CategoryElement> _categories;
   @override
-  @JsonKey(name: "categories")
   List<CategoryElement> get categories {
     if (_categories is EqualUnmodifiableListView) return _categories;
     // ignore: implicit_dynamic_type
@@ -247,30 +238,25 @@ class _$HomeModelImpl implements _HomeModel {
 
 abstract class _HomeModel implements HomeModel {
   const factory _HomeModel(
-      {@JsonKey(name: "success") required final int success,
-      @JsonKey(name: "message") required final String message,
-      @JsonKey(name: "banner1") required final List<Banner1> banner1,
+      {required final int success,
+      required final String message,
+      required final List<Banner1> banner1,
       @JsonKey(name: "best_seller") required final List<dynamic> bestSeller,
-      @JsonKey(name: "categories")
       required final List<CategoryElement> categories}) = _$HomeModelImpl;
 
   factory _HomeModel.fromJson(Map<String, dynamic> json) =
       _$HomeModelImpl.fromJson;
 
   @override
-  @JsonKey(name: "success")
   int get success;
   @override
-  @JsonKey(name: "message")
   String get message;
   @override
-  @JsonKey(name: "banner1")
   List<Banner1> get banner1;
   @override
   @JsonKey(name: "best_seller")
   List<dynamic> get bestSeller;
   @override
-  @JsonKey(name: "categories")
   List<CategoryElement> get categories;
   @override
   @JsonKey(ignore: true)
@@ -284,19 +270,15 @@ Banner1 _$Banner1FromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Banner1 {
-  @JsonKey(name: "id")
   int get id => throw _privateConstructorUsedError;
   @JsonKey(name: "link_type")
   int get linkType => throw _privateConstructorUsedError;
   @JsonKey(name: "link_value")
   String get linkValue => throw _privateConstructorUsedError;
-  @JsonKey(name: "image")
   String get image => throw _privateConstructorUsedError;
-  @JsonKey(name: "title")
   String get title => throw _privateConstructorUsedError;
   @JsonKey(name: "sub_title")
   String get subTitle => throw _privateConstructorUsedError;
-  @JsonKey(name: "logo")
   dynamic get logo => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -310,13 +292,13 @@ abstract class $Banner1CopyWith<$Res> {
       _$Banner1CopyWithImpl<$Res, Banner1>;
   @useResult
   $Res call(
-      {@JsonKey(name: "id") int id,
+      {int id,
       @JsonKey(name: "link_type") int linkType,
       @JsonKey(name: "link_value") String linkValue,
-      @JsonKey(name: "image") String image,
-      @JsonKey(name: "title") String title,
+      String image,
+      String title,
       @JsonKey(name: "sub_title") String subTitle,
-      @JsonKey(name: "logo") dynamic logo});
+      dynamic logo});
 }
 
 /// @nodoc
@@ -381,13 +363,13 @@ abstract class _$$Banner1ImplCopyWith<$Res> implements $Banner1CopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: "id") int id,
+      {int id,
       @JsonKey(name: "link_type") int linkType,
       @JsonKey(name: "link_value") String linkValue,
-      @JsonKey(name: "image") String image,
-      @JsonKey(name: "title") String title,
+      String image,
+      String title,
       @JsonKey(name: "sub_title") String subTitle,
-      @JsonKey(name: "logo") dynamic logo});
+      dynamic logo});
 }
 
 /// @nodoc
@@ -446,19 +428,18 @@ class __$$Banner1ImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$Banner1Impl implements _Banner1 {
   const _$Banner1Impl(
-      {@JsonKey(name: "id") required this.id,
+      {required this.id,
       @JsonKey(name: "link_type") required this.linkType,
       @JsonKey(name: "link_value") required this.linkValue,
-      @JsonKey(name: "image") required this.image,
-      @JsonKey(name: "title") required this.title,
+      required this.image,
+      required this.title,
       @JsonKey(name: "sub_title") required this.subTitle,
-      @JsonKey(name: "logo") required this.logo});
+      required this.logo});
 
   factory _$Banner1Impl.fromJson(Map<String, dynamic> json) =>
       _$$Banner1ImplFromJson(json);
 
   @override
-  @JsonKey(name: "id")
   final int id;
   @override
   @JsonKey(name: "link_type")
@@ -467,16 +448,13 @@ class _$Banner1Impl implements _Banner1 {
   @JsonKey(name: "link_value")
   final String linkValue;
   @override
-  @JsonKey(name: "image")
   final String image;
   @override
-  @JsonKey(name: "title")
   final String title;
   @override
   @JsonKey(name: "sub_title")
   final String subTitle;
   @override
-  @JsonKey(name: "logo")
   final dynamic logo;
 
   @override
@@ -522,18 +500,17 @@ class _$Banner1Impl implements _Banner1 {
 
 abstract class _Banner1 implements Banner1 {
   const factory _Banner1(
-      {@JsonKey(name: "id") required final int id,
+      {required final int id,
       @JsonKey(name: "link_type") required final int linkType,
       @JsonKey(name: "link_value") required final String linkValue,
-      @JsonKey(name: "image") required final String image,
-      @JsonKey(name: "title") required final String title,
+      required final String image,
+      required final String title,
       @JsonKey(name: "sub_title") required final String subTitle,
-      @JsonKey(name: "logo") required final dynamic logo}) = _$Banner1Impl;
+      required final dynamic logo}) = _$Banner1Impl;
 
   factory _Banner1.fromJson(Map<String, dynamic> json) = _$Banner1Impl.fromJson;
 
   @override
-  @JsonKey(name: "id")
   int get id;
   @override
   @JsonKey(name: "link_type")
@@ -542,16 +519,13 @@ abstract class _Banner1 implements Banner1 {
   @JsonKey(name: "link_value")
   String get linkValue;
   @override
-  @JsonKey(name: "image")
   String get image;
   @override
-  @JsonKey(name: "title")
   String get title;
   @override
   @JsonKey(name: "sub_title")
   String get subTitle;
   @override
-  @JsonKey(name: "logo")
   dynamic get logo;
   @override
   @JsonKey(ignore: true)
@@ -565,7 +539,6 @@ CategoryElement _$CategoryElementFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CategoryElement {
-  @JsonKey(name: "category")
   CategoryCategory get category => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -580,7 +553,7 @@ abstract class $CategoryElementCopyWith<$Res> {
           CategoryElement value, $Res Function(CategoryElement) then) =
       _$CategoryElementCopyWithImpl<$Res, CategoryElement>;
   @useResult
-  $Res call({@JsonKey(name: "category") CategoryCategory category});
+  $Res call({CategoryCategory category});
 
   $CategoryCategoryCopyWith<$Res> get category;
 }
@@ -625,7 +598,7 @@ abstract class _$$CategoryElementImplCopyWith<$Res>
       __$$CategoryElementImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@JsonKey(name: "category") CategoryCategory category});
+  $Res call({CategoryCategory category});
 
   @override
   $CategoryCategoryCopyWith<$Res> get category;
@@ -656,14 +629,12 @@ class __$$CategoryElementImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$CategoryElementImpl implements _CategoryElement {
-  const _$CategoryElementImpl(
-      {@JsonKey(name: "category") required this.category});
+  const _$CategoryElementImpl({required this.category});
 
   factory _$CategoryElementImpl.fromJson(Map<String, dynamic> json) =>
       _$$CategoryElementImplFromJson(json);
 
   @override
-  @JsonKey(name: "category")
   final CategoryCategory category;
 
   @override
@@ -700,15 +671,13 @@ class _$CategoryElementImpl implements _CategoryElement {
 }
 
 abstract class _CategoryElement implements CategoryElement {
-  const factory _CategoryElement(
-      {@JsonKey(name: "category")
-      required final CategoryCategory category}) = _$CategoryElementImpl;
+  const factory _CategoryElement({required final CategoryCategory category}) =
+      _$CategoryElementImpl;
 
   factory _CategoryElement.fromJson(Map<String, dynamic> json) =
       _$CategoryElementImpl.fromJson;
 
   @override
-  @JsonKey(name: "category")
   CategoryCategory get category;
   @override
   @JsonKey(ignore: true)
@@ -722,15 +691,10 @@ CategoryCategory _$CategoryCategoryFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CategoryCategory {
-  @JsonKey(name: "id")
   int get id => throw _privateConstructorUsedError;
-  @JsonKey(name: "slug")
   String get slug => throw _privateConstructorUsedError;
-  @JsonKey(name: "image")
   String get image => throw _privateConstructorUsedError;
-  @JsonKey(name: "name")
   String get name => throw _privateConstructorUsedError;
-  @JsonKey(name: "description")
   String get description => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -746,11 +710,7 @@ abstract class $CategoryCategoryCopyWith<$Res> {
       _$CategoryCategoryCopyWithImpl<$Res, CategoryCategory>;
   @useResult
   $Res call(
-      {@JsonKey(name: "id") int id,
-      @JsonKey(name: "slug") String slug,
-      @JsonKey(name: "image") String image,
-      @JsonKey(name: "name") String name,
-      @JsonKey(name: "description") String description});
+      {int id, String slug, String image, String name, String description});
 }
 
 /// @nodoc
@@ -806,11 +766,7 @@ abstract class _$$CategoryCategoryImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: "id") int id,
-      @JsonKey(name: "slug") String slug,
-      @JsonKey(name: "image") String image,
-      @JsonKey(name: "name") String name,
-      @JsonKey(name: "description") String description});
+      {int id, String slug, String image, String name, String description});
 }
 
 /// @nodoc
@@ -859,29 +815,24 @@ class __$$CategoryCategoryImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CategoryCategoryImpl implements _CategoryCategory {
   const _$CategoryCategoryImpl(
-      {@JsonKey(name: "id") required this.id,
-      @JsonKey(name: "slug") required this.slug,
-      @JsonKey(name: "image") required this.image,
-      @JsonKey(name: "name") required this.name,
-      @JsonKey(name: "description") required this.description});
+      {required this.id,
+      required this.slug,
+      required this.image,
+      required this.name,
+      required this.description});
 
   factory _$CategoryCategoryImpl.fromJson(Map<String, dynamic> json) =>
       _$$CategoryCategoryImplFromJson(json);
 
   @override
-  @JsonKey(name: "id")
   final int id;
   @override
-  @JsonKey(name: "slug")
   final String slug;
   @override
-  @JsonKey(name: "image")
   final String image;
   @override
-  @JsonKey(name: "name")
   final String name;
   @override
-  @JsonKey(name: "description")
   final String description;
 
   @override
@@ -924,30 +875,24 @@ class _$CategoryCategoryImpl implements _CategoryCategory {
 
 abstract class _CategoryCategory implements CategoryCategory {
   const factory _CategoryCategory(
-          {@JsonKey(name: "id") required final int id,
-          @JsonKey(name: "slug") required final String slug,
-          @JsonKey(name: "image") required final String image,
-          @JsonKey(name: "name") required final String name,
-          @JsonKey(name: "description") required final String description}) =
-      _$CategoryCategoryImpl;
+      {required final int id,
+      required final String slug,
+      required final String image,
+      required final String name,
+      required final String description}) = _$CategoryCategoryImpl;
 
   factory _CategoryCategory.fromJson(Map<String, dynamic> json) =
       _$CategoryCategoryImpl.fromJson;
 
   @override
-  @JsonKey(name: "id")
   int get id;
   @override
-  @JsonKey(name: "slug")
   String get slug;
   @override
-  @JsonKey(name: "image")
   String get image;
   @override
-  @JsonKey(name: "name")
   String get name;
   @override
-  @JsonKey(name: "description")
   String get description;
   @override
   @JsonKey(ignore: true)

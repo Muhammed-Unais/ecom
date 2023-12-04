@@ -27,13 +27,10 @@ class MyBagProductCard extends StatelessWidget {
           deleteIcon(),
           Row(
             children: [
-              Flexible(
-                child: Image.network(
-                  tempcategoryImage,
-                  fit: BoxFit.cover,
-                  width: size.width * 0.26,
-                  height: size.height * 0.15,
-                ),
+              Image.network(
+                tempcategoryImage,
+                fit: BoxFit.cover,
+                width: size.width * 0.26,
               ),
               const SizedBox(width: 16),
               Column(
@@ -134,8 +131,9 @@ class MyBagProductCard extends StatelessWidget {
   SizedBox sizeColorAndQuntity() {
     return SizedBox(
       width: size.width * 0.5,
-      child: Row(
+      child: Wrap(
         textDirection: TextDirection.ltr,
+        runSpacing: 5,
         children: [
           Text(
             'XL / Beige',
@@ -153,7 +151,7 @@ class MyBagProductCard extends StatelessWidget {
     );
   }
 
-  Wrap quatityController() {
+   quatityController() {
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
       children: [
@@ -176,7 +174,7 @@ class MyBagProductCard extends StatelessWidget {
             ),
           ),
           child: const Icon(
-            Icons.minimize,
+            Icons.remove,
             color: AppColors.primarySeed,
             size: 16,
           ),

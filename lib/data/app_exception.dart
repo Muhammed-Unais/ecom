@@ -6,7 +6,7 @@ class AppExceptions implements Exception {
   AppExceptions([this._message, this.statuscode]);
   @override
   String toString() {
-    return '$statuscode $_message';
+    return '$_message';
   }
 }
 

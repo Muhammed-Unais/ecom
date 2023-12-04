@@ -1,10 +1,8 @@
-import 'package:ecom/app/home/view/home_view.dart';
+import 'package:ecom/app/home/view/widgets/home_category_widget.dart';
 import 'package:ecom/app/home/view_model/home_view_model.dart';
 import 'package:ecom/data/app_response/status.dart';
-import 'package:ecom/res/constants/app_colors.dart';
 import 'package:ecom/res/widgets/shimmer_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class HomeCategoriesWidget extends StatefulWidget {
@@ -60,48 +58,20 @@ class _HomeCategoriesWidgetState extends State<HomeCategoriesWidget> {
                 itemBuilder: (context, index) {
                   final categoriesElement = response?.data?.categories[index];
                   final category = categoriesElement?.category;
-                  return Padding(
-                    padding: const EdgeInsets.only(right: 16),
-                    child: SizedBox(
-                      width: 100,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(5),
-                        child: Stack(
-                          children: [
-                            Image.network(
-                              tempcategoryImage,
-                              width: 100,
-                              fit: BoxFit.cover,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                left: 5,
-                                right: 5,
-                              ),
-                              child: Center(
-                                child: Text(
-                                  category?.name ??"category",
-                                  style: GoogleFonts.rubik(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w400,
-                                      color: AppColors.backgroundColor),
-                                  textAlign: TextAlign.center,
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 2,
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
+                  return HomeCategoryWidget(
+                    productImage: category?.image ?? "",
+                    category: category,
+                    size: widget.size,
                   );
                 },
               );
             case Status.error:
-              return Center(
-                child: Text(
-                  response?.message.toString() ?? "",
+              return const SizedBox(
+                height: 100,
+                child: Center(
+                  child: Text(
+                     "",
+                  ),
                 ),
               );
             default:

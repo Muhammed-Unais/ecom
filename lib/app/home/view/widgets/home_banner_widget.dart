@@ -1,21 +1,19 @@
-import 'package:ecom/app/home/view/home_view.dart';
 import 'package:ecom/app/home/view_model/home_view_model.dart';
 import 'package:ecom/data/app_response/status.dart';
+import 'package:ecom/res/constants/app_url.dart';
 import 'package:ecom/res/widgets/shimmer_widget.dart';
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class HomeBannerWidget extends StatefulWidget {
-  const HomeBannerWidget({super.key, required this.size});
+class HomeBannerWidget extends StatelessWidget {
+  const HomeBannerWidget(
+      {super.key, required this.size,});
 
   final Size size;
 
-  @override
-  State<HomeBannerWidget> createState() => _HomeBannerWidgetState();
-}
 
-class _HomeBannerWidgetState extends State<HomeBannerWidget> {
   @override
   Widget build(BuildContext context) {
     return Consumer<HomeViewModel>(
@@ -23,27 +21,30 @@ class _HomeBannerWidgetState extends State<HomeBannerWidget> {
         switch (homeProvider.homeApiResponse?.status) {
           case Status.loading:
             return Padding(
-              padding: const EdgeInsets.only(left: 16,right: 16),
+              padding: const EdgeInsets.only(left: 16, right: 16),
               child: ShimerWidget.rectangular(
-                width: widget.size.width,
-                hight: widget.size.height * 0.5,
+                width: size.width,
+                hight: size.height * 0.3,
                 verticalMargin: 20,
               ),
             );
           case Status.completed:
+          final banner =homeProvider.homeApiResponse?.data?.banner1[0];
             return Padding(
               padding: const EdgeInsets.only(left: 16, right: 16),
               child: SizedBox(
-                height: widget.size.height * 0.5,
-                width: widget.size.width,
+                width: size.width,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(5),
                   child: Stack(
                     children: [
-                      Image.network(
-                        width: widget.size.width,
-                        tempcategoryImage,
-                        fit: BoxFit.cover,
+                      FancyShimmerImage(
+                        imageUrl: AppUrl.bannerImageSchema + banner!.image,
+                        width: size.width,
+                        boxFit: BoxFit.fill,
+                        errorWidget: Image.asset(
+                          "assets/images/no_image.jpg",
+                        ),
                       ),
                       Positioned(
                         bottom: 30,
@@ -82,7 +83,20 @@ class _HomeBannerWidgetState extends State<HomeBannerWidget> {
             );
 
           case Status.error:
-            return Text(homeProvider.homeApiResponse?.message.toString() ?? "");
+            return GestureDetector(
+              onTap: () {
+                homeProvider.getHomeDetails();
+              },
+              child: SizedBox(
+                height: size.height * 0.5,
+                width: size.width,
+                child: Center(
+                  child: Text(
+                    "${homeProvider.homeApiResponse?.message.toString() ?? ""} Retry",
+                  ),
+                ),
+              ),
+            );
           default:
             return const SizedBox();
         }

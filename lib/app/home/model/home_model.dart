@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'dart:convert';
 part 'home_model.freezed.dart';
@@ -13,7 +15,7 @@ class HomeModel with _$HomeModel {
     required int success,
     required String message,
     required List<Banner1> banner1,
-    required List<dynamic> bestSeller,
+    @JsonKey(name: "best_seller") required List<dynamic> bestSeller,
     required List<CategoryElement> categories,
   }) = _HomeModel;
 
@@ -25,11 +27,11 @@ class HomeModel with _$HomeModel {
 class Banner1 with _$Banner1 {
   const factory Banner1({
     required int id,
-    required int linkType,
-    required String linkValue,
+    @JsonKey(name: "link_type") required int linkType,
+    @JsonKey(name: "link_value") required String linkValue,
     required String image,
     required String title,
-    required String subTitle,
+    @JsonKey(name: "sub_title") required String subTitle,
     required dynamic logo,
   }) = _Banner1;
 

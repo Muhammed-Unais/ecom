@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ecom/app/home/model/home_model.dart';
 import 'package:ecom/data/network/base_network_api_service.dart';
 import 'package:ecom/res/constants/app_url.dart';
@@ -12,7 +14,7 @@ class HomeRespository {
       final response = await _baseNetWorkApiService.getPostApiResponse(
         AppUrl.homeEndpoint,
       );
-
+      log(response.toString());
       return homeModelFromJson(response);
     } catch (e) {
       rethrow;

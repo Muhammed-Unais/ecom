@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:ecom/data/app_exception.dart';
 import 'package:ecom/data/network/base_network_api_service.dart';
 import 'package:ecom/res/constants/app_url.dart';
@@ -13,7 +14,7 @@ class NetworkApiService implements BaseNetWorkApiService {
     Map<String, dynamic>? queryParameters,
   }) async {
     try {
-      var uri = Uri.http(AppUrl.baseUrl, endPoint, queryParameters);
+      var uri = Uri.http(AppUrl.tempbaseUrl, endPoint, queryParameters);
 
       Response? response = await http.get(
         uri,
@@ -21,8 +22,8 @@ class NetworkApiService implements BaseNetWorkApiService {
       );
 
       return returnResponse(response);
-    } catch (e) {
-      rethrow;
+    } on SocketException {
+      throw FetchDataException('No Internet Connection');
     }
   }
 
@@ -43,8 +44,8 @@ class NetworkApiService implements BaseNetWorkApiService {
       );
 
       return returnResponse(response);
-    } catch (e) {
-      rethrow;
+    } on SocketException {
+      throw FetchDataException('No Internet Connection');
     }
   }
 
@@ -63,9 +64,11 @@ class NetworkApiService implements BaseNetWorkApiService {
 
       final responsebody = jsonDecode(response.body);
 
-      var body = responsebody as Map<String, dynamic>;
-      if (body.containsKey("message")) {
-        message = body["message"];
+      if (responsebody.runtimeType == Map<String, dynamic>) {
+        var body = responsebody as Map<String, dynamic>;
+        if (body.containsKey("message")) {
+          message = body["message"];
+        }
       }
 
       switch (response.statusCode) {
@@ -86,10 +89,6 @@ class NetworkApiService implements BaseNetWorkApiService {
         default:
           throw FetchDataException(message);
       }
-    } else {
-      throw FetchDataException(
-        'No internet connection',
-      );
     }
   }
 }
