@@ -13,4 +13,12 @@ class DeleteMyBagItemRepository {
       rethrow;
     }
   }
+
+  Future<void> clearAllBagItem() async {
+    try {
+      _baseLocalDataService.clearDb(dbName: "myBagItemDb");
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

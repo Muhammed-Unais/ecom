@@ -1,15 +1,14 @@
 import 'package:ecom/app/my_bag/model/my_bag_model.dart';
 import 'package:ecom/data/local_storage/base_local_data_service.dart';
 
-class AddMyBagItemRepository {
+class EditMyBagItemRepository {
   final BaseLocalDataService<MyBagItemModel> _baseLocalDataService;
 
-  AddMyBagItemRepository(this._baseLocalDataService);
+  EditMyBagItemRepository(this._baseLocalDataService);
 
-  Future<void> addMyBagItem(MyBagItemModel singleProduct) async {
+  Future<void> editMyBagItem(int index, MyBagItemModel model) async {
     try {
-      await _baseLocalDataService.postData(singleProduct,
-          dbName: "myBagItemDb");
+      _baseLocalDataService.putData(index, model, dbName: "myBagItemDb");
     } catch (e) {
       rethrow;
     }

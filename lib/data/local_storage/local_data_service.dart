@@ -11,7 +11,7 @@ class LocalDataService<T> implements BaseLocalDataService<T> {
   }
 
   @override
-  Future<void> postData(model,{required String dbName}) async {
+  Future<void> postData(model, {required String dbName}) async {
     final locaDb = Hive.box<T>(dbName);
 
     try {
@@ -24,7 +24,7 @@ class LocalDataService<T> implements BaseLocalDataService<T> {
   }
 
   @override
-  Future<void> putData(int index, model,{required String dbName}) async {
+  Future<void> putData(int index, model, {required String dbName}) async {
     final locaDb = Hive.box<T>(dbName);
 
     try {
@@ -35,7 +35,7 @@ class LocalDataService<T> implements BaseLocalDataService<T> {
   }
 
   @override
-  Future<void> deleteData(int index,{required String dbName}) async {
+  Future<void> deleteData(int index, {required String dbName}) async {
     final locaDb = Hive.box<T>(dbName);
 
     try {
@@ -46,9 +46,15 @@ class LocalDataService<T> implements BaseLocalDataService<T> {
   }
 
   @override
-  T? getAt(int index,{required String dbName}) {
+  T? getAt(int index, {required String dbName}) {
     final locaDb = Hive.box<T>(dbName);
 
     return locaDb.getAt(index);
+  }
+
+  @override
+  Future<int> clearDb({required String dbName}) {
+    final locaDb = Hive.box<T>(dbName);
+    return locaDb.clear();
   }
 }
