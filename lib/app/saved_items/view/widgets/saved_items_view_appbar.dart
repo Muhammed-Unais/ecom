@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class SavedItemViewAppBar extends StatelessWidget implements PreferredSizeWidget {
+class SavedItemViewAppBar extends StatelessWidget
+    implements PreferredSizeWidget {
   const SavedItemViewAppBar({
-    super.key,
+    super.key, required this.itemsCount,
   });
+
+  final int itemsCount;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +31,7 @@ class SavedItemViewAppBar extends StatelessWidget implements PreferredSizeWidget
             ),
           ),
           Text(
-            '2 items',
+            '$itemsCount items',
             style: GoogleFonts.rubik(
               color: const Color(0xFF5E6872),
               fontSize: 16,

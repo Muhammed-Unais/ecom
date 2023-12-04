@@ -1,13 +1,9 @@
-import 'dart:developer';
-
+import 'package:ecom/res/widgets/products_wishlist_icon.dart';
 import 'package:ecom/app/products_listing/model/products_model.dart';
 import 'package:ecom/app/products_listing/view_model/products_listing_view_model.dart';
-import 'package:ecom/app/saved_items/view_model/saved_items_view_model.dart';
-import 'package:ecom/res/constants/app_colors.dart';
 import 'package:ecom/res/widgets/product_card.dart';
 import 'package:ecom/res/widgets/shimmer_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class HomeProducts extends StatelessWidget {
@@ -69,25 +65,13 @@ class HomeProducts extends StatelessWidget {
               return Padding(
                 padding: const EdgeInsets.only(right: 16),
                 child: ProductCard(
-                  wishListIcon: GestureDetector(
-                    onTap: () {
-
-                    },
-                    child: SvgPicture.asset(
-                      "assets/svgs/favorite_icon.svg",
-                      colorFilter: const ColorFilter.mode(
-                        AppColors.primarySeed,
-                        
-                        BlendMode.srcIn,
-                      ),
-                    ),
-                  ),
-                  productImage: product?.image ?? "",
+                  wishListIcon: ProductsWishListIcon(product: product!),
+                  productImage: product.image,
                   imagehight: size.height * 0.26,
                   imageWidth: size.width * 0.5,
                   cardWidth: size.width * 0.43,
-                  productName: product?.name ?? "Not title",
-                  productPrice: product?.price.toString() ?? "0.00",
+                  productName: product.name,
+                  productPrice: product.price.toString(),
                 ),
               );
             },

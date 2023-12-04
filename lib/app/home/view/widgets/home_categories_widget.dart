@@ -1,15 +1,13 @@
 import 'package:ecom/app/home/view/widgets/home_category_widget.dart';
 import 'package:ecom/app/home/view_model/home_view_model.dart';
+import 'package:ecom/app/saved_items/view_model/saved_items_view_model.dart';
 import 'package:ecom/data/app_response/status.dart';
 import 'package:ecom/res/widgets/shimmer_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class HomeCategoriesWidget extends StatefulWidget {
-  const HomeCategoriesWidget({
-    super.key,
-    required this.size,
-  });
+  const HomeCategoriesWidget({super.key, required this.size});
 
   final Size size;
 
@@ -23,6 +21,7 @@ class _HomeCategoriesWidgetState extends State<HomeCategoriesWidget> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       final homeProvider = context.read<HomeViewModel>();
       homeProvider.homeApiResponse ?? homeProvider.getHomeDetails();
+      context.read<SavedItemViewModel>().getAllSavedItems();
     });
     super.initState();
   }
@@ -70,7 +69,7 @@ class _HomeCategoriesWidgetState extends State<HomeCategoriesWidget> {
                 height: 100,
                 child: Center(
                   child: Text(
-                     "",
+                    "",
                   ),
                 ),
               );

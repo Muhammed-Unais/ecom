@@ -1,10 +1,10 @@
-import 'dart:developer';
 import 'package:ecom/app/products_listing/model/products_model.dart';
 import 'package:ecom/app/saved_items/model/saveditem_model.dart';
 import 'package:ecom/app/saved_items/repository/add_saved_product_repository.dart';
 import 'package:ecom/app/saved_items/repository/delete_saved_item_repository.dart';
 import 'package:ecom/app/saved_items/repository/get_all_saveditem_repository.dart';
 import 'package:ecom/data/local_storage/local_data_service.dart';
+import 'package:ecom/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class SavedItemViewModel extends ChangeNotifier {
@@ -32,7 +32,7 @@ class SavedItemViewModel extends ChangeNotifier {
     return false;
   }
 
-  Future<void> addSavedItemtoDb(SingleProduct product) async {
+  Future<void> addSavedItemtoDb(SingleProduct product,BuildContext context) async {
     if (!isAlreadyAdded(product)) {
       final savedItemModel = SavedItemModel(
         name: product.name,
@@ -45,28 +45,53 @@ class SavedItemViewModel extends ChangeNotifier {
         stock: product.stock,
       );
       _addSavedItemRepo.addSavedProduct(savedItemModel).then((value) {
-        log("added");
+        Utils.showCustomSnackBar(
+        context,
+        "Product is added to My Saved Items",
+        actionLabel: "",
+        onPressed: () {},
+      );
+        getAllSavedItems();
       }).onError((error, stackTrace) {
-        log(error.toString());
+         Utils.showCustomSnackBar(
+        context,
+        "Something went wrong",
+        actionLabel: "",
+        onPressed: () {},
+      );
       });
     }
   }
 
-  Future<void> deleteItemFromSavedScreen(int index) async {
+  Future<void> deleteItemFromSavedScreen(
+      int index, BuildContext context) async {
     await _deleteSavedItemRepo.deleteSavedItem(index).then((value) {
-      log("delted");
+      Utils.showCustomSnackBar(
+        context,
+        "Product is removed from My Saved Items",
+        actionLabel: "",
+        onPressed: () {},
+      );
       getAllSavedItems();
-    }).onError((error, stackTrace) {});
+    }).onError((error, stackTrace) {
+      Utils.showCustomSnackBar(
+        context,
+        "Something went wrong",
+        actionLabel: "",
+        onPressed: () {},
+      );
+    });
   }
 
-  Future<void> randomDelete(SingleProduct product) async {
+  Future<void> randomDelete(SingleProduct product, BuildContext context) async {
     int index = _savedItemModels
         .indexWhere((savedItem) => product.name == savedItem.name);
 
-    deleteItemFromSavedScreen(index);
+    deleteItemFromSavedScreen(index, context);
   }
 
   void getAllSavedItems() {
     _savedItemModels = _getAllSavedItemRepo.getAllSavedItems();
+    notifyListeners();
   }
 }
