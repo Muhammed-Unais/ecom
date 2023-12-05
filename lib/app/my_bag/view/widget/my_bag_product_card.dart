@@ -1,5 +1,6 @@
-import 'package:ecom/app/home/view/home_view.dart';
 import 'package:ecom/res/constants/app_colors.dart';
+import 'package:ecom/res/constants/app_url.dart';
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,10 +9,30 @@ class MyBagProductCard extends StatelessWidget {
   const MyBagProductCard({
     super.key,
     required this.size,
+    this.deleteonTap,
+    required this.imageUrl,
+    required this.productName,
+    required this.oldPrice,
+    required this.price,
+    required this.discount,
+    this.decreaseOnTap,
+    this.increaseOnTap,
+    required this.count,
+    required this.stock,
   });
 
   final Size size;
- 
+  final void Function()? deleteonTap;
+  final String imageUrl;
+  final String productName;
+  final String oldPrice;
+  final String price;
+  final String discount;
+  final void Function()? decreaseOnTap;
+  final void Function()? increaseOnTap;
+  final int count;
+  final int stock;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,25 +45,35 @@ class MyBagProductCard extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          deleteIcon(),
+          deleteIcon(onTap: deleteonTap),
           Row(
             children: [
-              Image.network(
-                tempcategoryImage,
-                fit: BoxFit.cover,
-                width: size.width * 0.26,
+              Flexible(
+                child: FancyShimmerImage(
+                  imageUrl: AppUrl.productImageSchema + imageUrl,
+                  width: size.width * 0.26,
+                  height: size.height * 0.17,
+                  boxFit: BoxFit.cover,
+                  errorWidget: Image.asset(
+                    "assets/images/no_image.jpg",
+                  ),
+                ),
               ),
               const SizedBox(width: 16),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  productName(),
+                  productNameWidget(productName),
                   const SizedBox(height: 10),
-                  productMrp(),
+                  productMrp(oldPrice),
                   const SizedBox(height: 10),
-                  priceAndOffer(),
+                  priceAndOffer(price, discount),
                   const SizedBox(height: 10),
-                  sizeColorAndQuntity(),
+                  sizeColorAndQuntity(
+                    count: count,
+                    decreaseOnTap: decreaseOnTap,
+                    increaseOnTap: increaseOnTap,
+                  ),
                 ],
               )
             ],
@@ -52,9 +83,9 @@ class MyBagProductCard extends StatelessWidget {
     );
   }
 
-  Text productMrp() {
+  Text productMrp(String oldPrice) {
     return Text(
-      '£60.00',
+      '£$oldPrice',
       style: GoogleFonts.rubik(
         color: const Color(0xFF828282),
         fontSize: 14,
@@ -65,11 +96,11 @@ class MyBagProductCard extends StatelessWidget {
     );
   }
 
-  SizedBox productName() {
+  SizedBox productNameWidget(String productName) {
     return SizedBox(
       width: size.width * 0.5,
       child: Text(
-        "Men's Black The Ryuk Graphic Printed Oversized T-shirt",
+        productName,
         style: GoogleFonts.rubik(
           color: AppColors.primarySeed,
           fontSize: 11,
@@ -81,12 +112,12 @@ class MyBagProductCard extends StatelessWidget {
     );
   }
 
-  Positioned deleteIcon() {
+  Positioned deleteIcon({void Function()? onTap}) {
     return Positioned(
       right: 0,
       top: 0,
       child: GestureDetector(
-        onTap: () {},
+        onTap: onTap,
         child: SvgPicture.asset(
           "assets/svgs/delete_icon.svg",
           height: 24,
@@ -96,14 +127,14 @@ class MyBagProductCard extends StatelessWidget {
     );
   }
 
-  SizedBox priceAndOffer() {
+  SizedBox priceAndOffer(String price, String discount) {
     return SizedBox(
       width: size.width * 0.5,
       child: Wrap(
         crossAxisAlignment: WrapCrossAlignment.center,
         children: [
           Text(
-            '£3999.95',
+            '£$price',
             style: GoogleFonts.rubik(
               color: AppColors.primarySeed,
               fontSize: 18,
@@ -114,21 +145,26 @@ class MyBagProductCard extends StatelessWidget {
           const SizedBox(
             width: 10,
           ),
-          Text(
-            '20% OFF',
-            style: GoogleFonts.rubik(
-              color: const Color(0xFF2F935F),
-              fontSize: 15,
-              fontWeight: FontWeight.w400,
-              height: 0,
-            ),
-          )
+          discount.contains("0|nil")
+              ? const SizedBox()
+              : Text(
+                  '$discount% OFF',
+                  style: GoogleFonts.rubik(
+                    color: const Color(0xFF2F935F),
+                    fontSize: 15,
+                    fontWeight: FontWeight.w400,
+                    height: 0,
+                  ),
+                )
         ],
       ),
     );
   }
 
-  SizedBox sizeColorAndQuntity() {
+  SizedBox sizeColorAndQuntity(
+      {void Function()? decreaseOnTap,
+      void Function()? increaseOnTap,
+      required int count}) {
     return SizedBox(
       width: size.width * 0.5,
       child: Wrap(
@@ -145,13 +181,29 @@ class MyBagProductCard extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 16),
-          quatityController()
+          stock < 1
+              ? Text(
+                  "Item not available",
+                  style: GoogleFonts.rubik(
+                    fontSize: 16,
+                    color: Colors.red,
+                    fontWeight: FontWeight.w300,
+                  ),
+                )
+              : quatityController(
+                  count: count,
+                  decreaseOnTap: decreaseOnTap,
+                  increaseOnTap: increaseOnTap,
+                )
         ],
       ),
     );
   }
 
-   quatityController() {
+  quatityController(
+      {void Function()? decreaseOnTap,
+      void Function()? increaseOnTap,
+      required int count}) {
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
       children: [
@@ -164,24 +216,27 @@ class MyBagProductCard extends StatelessWidget {
             height: 0,
           ),
         ),
-        Container(
-          width: 22,
-          height: 22,
-          decoration: ShapeDecoration(
-            color: const Color(0xFFEEEEEE),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(4),
+        GestureDetector(
+          onTap: decreaseOnTap,
+          child: Container(
+            width: 22,
+            height: 22,
+            decoration: ShapeDecoration(
+              color: const Color(0xFFEEEEEE),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(4),
+              ),
             ),
-          ),
-          child: const Icon(
-            Icons.remove,
-            color: AppColors.primarySeed,
-            size: 16,
+            child: const Icon(
+              Icons.remove,
+              color: AppColors.primarySeed,
+              size: 16,
+            ),
           ),
         ),
         const SizedBox(width: 8),
         Text(
-          '1',
+          count.toString(),
           style: GoogleFonts.rubik(
             color: AppColors.primarySeed,
             fontSize: 14,
@@ -190,19 +245,22 @@ class MyBagProductCard extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 8),
-        Container(
-          width: 22,
-          height: 22,
-          decoration: ShapeDecoration(
-            color: const Color(0xFFEEEEEE),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(4),
+        GestureDetector(
+          onTap: increaseOnTap,
+          child: Container(
+            width: 22,
+            height: 22,
+            decoration: ShapeDecoration(
+              color: const Color(0xFFEEEEEE),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(4),
+              ),
             ),
-          ),
-          child: const Icon(
-            Icons.add,
-            color: AppColors.primarySeed,
-            size: 16,
+            child: const Icon(
+              Icons.add,
+              color: AppColors.primarySeed,
+              size: 16,
+            ),
           ),
         ),
       ],

@@ -1,3 +1,4 @@
+import 'package:ecom/app/saved_items/view/widgets/saved_item_add_to_bag_button.dart';
 import 'package:ecom/app/saved_items/view/widgets/saved_items_product_card.dart';
 import 'package:ecom/app/saved_items/view/widgets/saved_items_view_appbar.dart';
 import 'package:ecom/app/saved_items/view_model/saved_items_view_model.dart';
@@ -57,6 +58,10 @@ class SavedItemView extends StatelessWidget {
                       },
                     );
                   },
+                  addToBagButton: SavedItemAddToBagButton(
+                    size: size,
+                    savedItemModel: savedProduct,
+                  ),
                 );
               },
               separatorBuilder: (context, index) {
@@ -72,3 +77,5 @@ class SavedItemView extends StatelessWidget {
     );
   }
 }
+
+

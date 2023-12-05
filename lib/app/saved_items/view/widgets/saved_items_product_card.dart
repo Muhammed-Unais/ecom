@@ -1,6 +1,5 @@
 import 'package:ecom/res/constants/app_colors.dart';
 import 'package:ecom/res/constants/app_url.dart';
-import 'package:ecom/res/widgets/elavated_button_with_icon.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -14,7 +13,9 @@ class SavedItmeProductCard extends StatelessWidget {
     required this.productName,
     required this.productOldPrice,
     required this.productPrice,
-    required this.discount, this.deleteonTap,
+    required this.discount,
+    this.deleteonTap,
+    required this.addToBagButton,
   });
 
   final Size size;
@@ -24,7 +25,7 @@ class SavedItmeProductCard extends StatelessWidget {
   final String productPrice;
   final String discount;
   final void Function()? deleteonTap;
-
+  final Widget addToBagButton;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -59,7 +60,7 @@ class SavedItmeProductCard extends StatelessWidget {
                   )
                 ],
               ),
-              addTobagButton(),
+              addToBagButton,
             ],
           ),
         ],
@@ -77,19 +78,6 @@ class SavedItmeProductCard extends StatelessWidget {
         errorWidget: Image.asset(
           "assets/images/no_image.jpg",
         ),
-      ),
-    );
-  }
-
-  SizedBox addTobagButton() {
-    return SizedBox(
-      width: size.width * 0.65,
-      child: ElevatedButtonWithIcon(
-        onPressed: () {},
-        width: size.width * 0.5,
-        buttonChildName: "ADD TO BAG",
-        svgIcon: "assets/svgs/cart_bag_icon.svg",
-        hight: 35,
       ),
     );
   }

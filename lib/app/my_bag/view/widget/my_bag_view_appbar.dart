@@ -1,7 +1,9 @@
+import 'package:ecom/app/my_bag/view_model/my_bag_view_model.dart';
 import 'package:ecom/res/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class MyBagViewAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MyBagViewAppBar({
@@ -10,6 +12,7 @@ class MyBagViewAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    int length= context.watch<MyBagViewModel>().myBagitems.length;
     return AppBar(
       elevation: 5,
       backgroundColor: AppColors.backgroundColor,
@@ -28,7 +31,7 @@ class MyBagViewAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
           ),
           Text(
-            '4 items',
+            '$length items',
             style: GoogleFonts.rubik(
               color: const Color(0xFF5E6872),
               fontSize: 16,

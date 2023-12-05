@@ -23,6 +23,8 @@ class ElevatedButtonWithIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
+        disabledBackgroundColor: AppColors.secondaryColor,
+        disabledForegroundColor: AppColors.primarySeed,
         backgroundColor: Colors.black,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(100),

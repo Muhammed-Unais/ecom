@@ -1,7 +1,9 @@
+import 'package:ecom/app/my_bag/view_model/my_bag_view_model.dart';
 import 'package:ecom/res/constants/app_colors.dart';
 import 'package:ecom/res/widgets/elavated_button_without_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class TotalPriceAndCheckoutButton extends StatelessWidget {
   const TotalPriceAndCheckoutButton({
@@ -13,6 +15,7 @@ class TotalPriceAndCheckoutButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final total= context.watch<MyBagViewModel>().getTotal();
     return Container(
       padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
       decoration: const BoxDecoration(
@@ -56,14 +59,14 @@ class TotalPriceAndCheckoutButton extends StatelessWidget {
                 ),
               ),
               Text(
-                '£79.90',
+                '£$total',
                 style: GoogleFonts.rubik(
                   color: AppColors.primarySeed,
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
                   height: 0,
                 ),
-              )
+              ),
             ],
           ),
           const SizedBox(
@@ -82,9 +85,7 @@ class TotalPriceAndCheckoutButton extends StatelessWidget {
           ElevatedButtonWithoutIcon(
             size: size,
             buttonChildName: "CHECKOUT",
-            onPressed: () {
-              
-            },
+            onPressed: () {},
           ),
           const SizedBox(
             height: 10,

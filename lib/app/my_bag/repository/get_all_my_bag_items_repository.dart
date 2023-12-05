@@ -7,6 +7,6 @@ class GetAllMyBagItemRepository {
   GetAllMyBagItemRepository(this._baseLocalDataService);
 
   List<MyBagItemModel> getAllSavedItems()  {
-    return  _baseLocalDataService.getData(dbName: "savedItemDb");
+    return  _baseLocalDataService.getData(dbName: "myBagItemDb");
   }
 }
