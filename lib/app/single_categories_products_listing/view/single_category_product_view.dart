@@ -1,34 +1,46 @@
+import 'dart:developer';
 import 'package:ecom/app/products_listing/view/widgets/products_loading_widget.dart';
+import 'package:ecom/app/single_categories_products_listing/view/widget/single_product_appbar.dart';
+import 'package:ecom/app/single_categories_products_listing/view_model/single_category_product_listintg_view_model.dart';
 import 'package:ecom/data/app_response/status.dart';
-import 'package:ecom/res/constants/app_colors.dart';
 import 'package:ecom/res/widgets/products_wishlist_icon.dart';
 import 'package:ecom/app/products_listing/view/widgets/products_view_appbar.dart';
-import 'package:ecom/app/products_listing/view_model/products_listing_view_model.dart';
 import 'package:ecom/res/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ProductsView extends StatefulWidget {
-  const ProductsView({super.key, required this.isInBottomBar});
+class SingleCategoryProductsView extends StatefulWidget {
+  const SingleCategoryProductsView({
+    super.key,
+    required this.isInBottomBar,
+    required this.categorySlug,
+    required this.categoryName,
+  });
 
   final bool isInBottomBar;
+  final String categorySlug;
+  final String categoryName;
 
   @override
-  State<ProductsView> createState() => _ProductsViewState();
+  State<SingleCategoryProductsView> createState() =>
+      _SingleCategoryProductsViewState();
 }
 
-class _ProductsViewState extends State<ProductsView> {
+class _SingleCategoryProductsViewState
+    extends State<SingleCategoryProductsView> {
   ScrollController scrollControler = ScrollController();
 
-  late ProductsListingViewModel productsProvider;
+  late SingleCategoryProductsListingViewModel productsProvider;
 
   Future<void> getAlldata() async {
-    await productsProvider.getAllProducts(page: 1);
+    log(widget.categorySlug);
+    await productsProvider.getAllProducts(
+        page: 1, query: {"by": "category", "value": widget.categorySlug});
   }
 
   @override
   void initState() {
-    productsProvider = context.read<ProductsListingViewModel>();
+    productsProvider = context.read<SingleCategoryProductsListingViewModel>();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       productsProvider.productsApiResponse ?? getAlldata();
     });
@@ -38,7 +50,10 @@ class _ProductsViewState extends State<ProductsView> {
   @override
   void didChangeDependencies() {
     scrollControler.addListener(() {
-      productsProvider.scrollMaxChecking(scrollControler);
+      productsProvider.scrollMaxChecking(scrollControler, {
+        "by": "category",
+        "value": widget.categorySlug,
+      });
     });
     super.didChangeDependencies();
   }
@@ -52,14 +67,12 @@ class _ProductsViewState extends State<ProductsView> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final itemCount = productsProvider
-        .productsApiResponse?.data?.products.productsReturn.total;
     return Scaffold(
-      appBar: PrdouctsAppBar(
+      appBar: SinglePrdouctsAppBar(
+        categoryName: widget.categoryName,
         isInBottomBar: widget.isInBottomBar,
-        itemsCount: itemCount ??0,
       ),
-      body: Consumer<ProductsListingViewModel>(
+      body: Consumer<SingleCategoryProductsListingViewModel>(
         builder: (context, productProvider, _) {
           final response = productProvider.productsApiResponse;
           switch (response?.status) {
@@ -108,10 +121,10 @@ class _ProductsViewState extends State<ProductsView> {
                         child: SizedBox(
                           width: 24,
                           height: 24,
-                          child: CircularProgressIndicator(
-                            color: AppColors.primarySeed,
-                            strokeWidth: 4,
-                          ),
+                          // child: CircularProgressIndicator(
+                          //   color: AppColors.primarySeed,
+                          //   strokeWidth: 4,
+                          // ),
                         ),
                       )
                   ],

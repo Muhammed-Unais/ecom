@@ -1,6 +1,8 @@
 import 'package:ecom/app/home/view/widgets/home_category_widget.dart';
 import 'package:ecom/app/home/view_model/home_view_model.dart';
 import 'package:ecom/app/saved_items/view_model/saved_items_view_model.dart';
+import 'package:ecom/app/single_categories_products_listing/view/single_category_product_view.dart';
+import 'package:ecom/app/single_categories_products_listing/view_model/single_category_product_listintg_view_model.dart';
 import 'package:ecom/data/app_response/status.dart';
 import 'package:ecom/res/widgets/shimmer_widget.dart';
 import 'package:flutter/material.dart';
@@ -57,10 +59,30 @@ class _HomeCategoriesWidgetState extends State<HomeCategoriesWidget> {
                 itemBuilder: (context, index) {
                   final categoriesElement = response?.data?.categories[index];
                   final category = categoriesElement?.category;
-                  return HomeCategoryWidget(
-                    productImage: category?.image ?? "",
-                    category: category,
-                    size: widget.size,
+                  return GestureDetector(
+                    onTap: () async {
+                      context
+                          .read<SingleCategoryProductsListingViewModel>()
+                          .clearCategoryProductsCache();
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return SingleCategoryProductsView(
+                              isInBottomBar: false,
+                              categoryName: category!.name,
+                              categorySlug: category.slug,
+                            );
+                          },
+                        ),
+                      );
+                    },
+                    child: HomeCategoryWidget(
+                      productImage: category?.image ?? "",
+                      category: category,
+                      size: widget.size,
+                    ),
                   );
                 },
               );

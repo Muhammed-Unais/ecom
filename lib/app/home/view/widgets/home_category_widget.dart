@@ -41,15 +41,20 @@ class HomeCategoryWidget extends StatelessWidget {
                   right: 5,
                 ),
                 child: Center(
-                  child: Text(
-                    category?.name ?? "category",
-                    style: GoogleFonts.rubik(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.backgroundColor),
-                    textAlign: TextAlign.center,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
+                  child: Container(
+                    padding: const EdgeInsets.all(1.0),
+                    color: Colors.black
+                        .withOpacity(0.5), // Semi-transparent black background
+                    child: Text(
+                      category?.name ?? "category",
+                      style: GoogleFonts.rubik(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                          color: AppColors.backgroundColor),
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                    ),
                   ),
                 ),
               )

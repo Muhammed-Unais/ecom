@@ -4,11 +4,12 @@ import 'package:ecom/data/app_response/app_response.dart';
 import 'package:ecom/data/network/network_api_service.dart';
 import 'package:flutter/material.dart';
 
-class ProductsListingViewModel extends ChangeNotifier {
+class SingleCategoryProductsListingViewModel extends ChangeNotifier {
   // repositories
   final _getallProductRepo = GetAllProductRepository(NetworkApiService());
 
   // variables
+  int limit = 10;
 
   List<SingleProduct> _productList = [];
 
@@ -20,7 +21,6 @@ class ProductsListingViewModel extends ChangeNotifier {
 
   bool isLimit = false;
 
-  int totalItem = 0;
 
   ApiResponse<ProductsModel>? productsApiResponse;
 
@@ -29,8 +29,7 @@ class ProductsListingViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getAllProducts(
-      {int page = 1, Map<String, dynamic>? query}) async {
+  Future<void> getAllProducts({int page = 1, Map<String,dynamic>? query}) async {
     setProductApiResponse(ApiResponse.loading());
 
     final queryParmas = {"page": page.toString(), ...?query};
@@ -40,18 +39,15 @@ class ProductsListingViewModel extends ChangeNotifier {
 
       lastPage = value.products.productsReturn.lastPage;
 
-      totalItem = value.products.productsReturn.total;
-
       setProductApiResponse(ApiResponse.completed(value));
     }).onError((error, stackTrace) {
       setProductApiResponse(
-        ApiResponse.error(error.toString()),
+        ApiResponse.error("Something went wrong"),
       );
     });
   }
 
-  Future<void> getAllProductsPagination(
-      {int page = 1, Map<String, dynamic>? query}) async {
+  Future<void> getAllProductsPagination({int page = 1,Map<String,dynamic>? query}) async {
     final queryParmas = {"page": page.toString(), ...?query};
 
     _productList += await _getallProductRepo.getAllProducts(queryParmas);
@@ -59,13 +55,11 @@ class ProductsListingViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<List<SingleProduct>> getProductHome({
-    int page = 1,
-  }) async {
+  Future<List<SingleProduct>> getProductHome({int page = 1,}) async {
     return await _getallProductRepo.getAllProducts({"page": page.toString()});
   }
 
-  void scrollMaxChecking(ScrollController controller) {
+  void scrollMaxChecking(ScrollController controller,Map<String,dynamic>? query) {
     if (currentPage == lastPage) {
       isLimit = true;
       notifyListeners();
@@ -73,7 +67,15 @@ class ProductsListingViewModel extends ChangeNotifier {
     }
     if (controller.position.pixels == controller.position.maxScrollExtent) {
       currentPage++;
-      getAllProductsPagination(page: currentPage);
+      getAllProductsPagination(page: currentPage,query: query);
     }
+  }
+
+   void clearCategoryProductsCache() {
+
+    lastPage = 0;
+    currentPage = 1;
+    isLimit = false;
+    productsApiResponse = null;
   }
 }

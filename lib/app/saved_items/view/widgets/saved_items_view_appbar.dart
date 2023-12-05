@@ -1,7 +1,9 @@
+import 'package:ecom/app/bottom_navigation_bar/view_model/bottom_bar_view_model.dart';
 import 'package:ecom/res/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class SavedItemViewAppBar extends StatelessWidget
     implements PreferredSizeWidget {
@@ -54,13 +56,19 @@ class SavedItemViewAppBar extends StatelessWidget
         ),
       ),
       actions: [
-        SvgPicture.asset(
-          "assets/svgs/cart_bag_icon.svg",
-          height: 20,
-          width: 20,
-          colorFilter: const ColorFilter.mode(
-            AppColors.primarySeed,
-            BlendMode.srcIn,
+        InkWell(
+          onTap: () {
+            context.read<BottomBarViewModel>().setBottomBarCurrentScreen(2);
+            
+          },
+          child: SvgPicture.asset(
+            "assets/svgs/cart_bag_icon.svg",
+            height: 20,
+            width: 20,
+            colorFilter: const ColorFilter.mode(
+              AppColors.primarySeed,
+              BlendMode.srcIn,
+            ),
           ),
         ),
         const SizedBox(

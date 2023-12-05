@@ -6,6 +6,7 @@ import 'package:ecom/app/my_bag/view_model/my_bag_view_model.dart';
 import 'package:ecom/app/products_listing/view_model/products_listing_view_model.dart';
 import 'package:ecom/app/saved_items/model/saveditem_model.dart';
 import 'package:ecom/app/saved_items/view_model/saved_items_view_model.dart';
+import 'package:ecom/app/single_categories_products_listing/view_model/single_category_product_listintg_view_model.dart';
 import 'package:ecom/res/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -53,6 +54,11 @@ void main() async {
         ChangeNotifierProvider(
           create: (context) {
             return MyBagViewModel();
+          },
+        ),
+        ChangeNotifierProvider(
+          create: (context) {
+            return SingleCategoryProductsListingViewModel();
           },
         ),
       ],
