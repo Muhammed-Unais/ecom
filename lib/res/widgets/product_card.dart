@@ -10,7 +10,7 @@ class ProductCard extends StatelessWidget {
     super.key,
     required this.imageWidth,
     required this.cardWidth,
-    this.productImage = tempcategoryImage,
+    required this.productImage,
     required this.productName,
     required this.productPrice,
     required this.imagehight, required this.wishListIcon,

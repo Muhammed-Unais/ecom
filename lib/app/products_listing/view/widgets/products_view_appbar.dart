@@ -5,10 +5,13 @@ import 'package:google_fonts/google_fonts.dart';
 
 class PrdouctsAppBar extends StatelessWidget implements PreferredSizeWidget {
   const PrdouctsAppBar({
-    super.key, required this.isInBottomBar,
+    super.key,
+    required this.isInBottomBar, required this.itemsCount,
   });
 
   final bool isInBottomBar;
+
+  final int itemsCount;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +24,7 @@ class PrdouctsAppBar extends StatelessWidget implements PreferredSizeWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Oversized T-Shirts',
+            'All Products',
             style: GoogleFonts.rubik(
               color: Colors.black,
               fontSize: 18,
@@ -30,7 +33,7 @@ class PrdouctsAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
           ),
           Text(
-            '2374 items',
+            '$itemsCount items',
             style: GoogleFonts.rubik(
               color: const Color(0xFF5E6872),
               fontSize: 16,
@@ -40,17 +43,19 @@ class PrdouctsAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ],
       ),
-      leading: isInBottomBar ? null: GestureDetector(
-        onTap: () {
-          Navigator.pop(context);
-        },
-        child: SvgPicture.asset(
-          "assets/svgs/back_arrow_icon.svg",
-          height: 16,
-          width: 18,
-          fit: BoxFit.none,
-        ),
-      ),
+      leading: isInBottomBar
+          ? null
+          : GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: SvgPicture.asset(
+                "assets/svgs/back_arrow_icon.svg",
+                height: 16,
+                width: 18,
+                fit: BoxFit.none,
+              ),
+            ),
       actions: [
         SvgPicture.asset(
           "assets/svgs/search_icon.svg",

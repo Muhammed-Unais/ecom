@@ -19,7 +19,7 @@ class HomeProducts extends StatelessWidget {
     return SizedBox(
       height: size.height * 0.32,
       child: FutureBuilder<List<SingleProduct>>(
-        future: context.read<ProductsListingViewModel>().getAllProducts(),
+        future: context.read<ProductsListingViewModel>().getProductHome(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return ListView.builder(

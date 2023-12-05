@@ -22,4 +22,20 @@ class GetAllProductRepository {
       rethrow;
     }
   }
+
+  Future<ProductsModel> getAllProductsModel(
+      Map<String, dynamic> queryParameters) async {
+    try {
+      final response = await _baseNetWorkApiService.getPostApiResponse(
+        AppUrl.getAllProductsApi,
+        queryParameters: queryParameters,
+      );
+
+      final productModel = productsModelFromJson(response);
+
+      return productModel;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
