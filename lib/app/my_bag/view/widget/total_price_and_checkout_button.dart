@@ -1,4 +1,4 @@
-import 'package:ecom/app/checkout/view/checkout_view.dart';
+import 'package:ecom/app/order_status/view/checkout_view.dart';
 import 'package:ecom/app/my_bag/view_model/my_bag_view_model.dart';
 import 'package:ecom/res/constants/app_colors.dart';
 import 'package:ecom/res/widgets/elavated_button_without_icon.dart';
@@ -92,7 +92,7 @@ class TotalPriceAndCheckoutButton extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return const CheckoutView();
+                      return const OrderStatusView();
                     },
                   ),
                 );

@@ -6,8 +6,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class CheckoutView extends StatelessWidget {
-  const CheckoutView({super.key});
+class OrderStatusView extends StatelessWidget {
+  const OrderStatusView({super.key});
 
   @override
   Widget build(BuildContext context) {

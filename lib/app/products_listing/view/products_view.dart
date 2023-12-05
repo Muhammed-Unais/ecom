@@ -8,13 +8,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ProductsView extends StatelessWidget {
-  const ProductsView({super.key});
-
+  const ProductsView({super.key, required this.isInBottomBar});
+  
+  final bool isInBottomBar;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: const PrdouctsAppBar(),
+      appBar:  PrdouctsAppBar(isInBottomBar: isInBottomBar),
       body: FutureBuilder<List<SingleProduct>>(
         future: context.watch<ProductsListingViewModel>().getAllProducts(),
         builder: (context, snapshot) {

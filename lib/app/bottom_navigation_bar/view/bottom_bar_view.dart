@@ -18,9 +18,9 @@ class BottomBarView extends StatefulWidget {
 class _BottomBarViewState extends State<BottomBarView> {
   List<Widget> screens = [
     const HomeView(),
-    const ProductsView(),
-    const MyBagView(),
-    const SavedItemView()
+    const ProductsView(isInBottomBar: true),
+    const MyBagView(isInBottomBar: true),
+    const SavedItemView(isInBottomBar: true,)
   ];
 
   @override

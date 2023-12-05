@@ -9,7 +9,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class SavedItemView extends StatelessWidget {
-  const SavedItemView({super.key});
+  const SavedItemView({super.key, required this.isInBottomBar});
+
+  final bool isInBottomBar;
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +23,7 @@ class SavedItemView extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFEEEEEE),
       appBar: SavedItemViewAppBar(
+        isInBottomBar: isInBottomBar,
         itemsCount: savedItemsProvider.savedItemModels.length,
       ),
       body: savedItemsProvider.savedItemModels.isEmpty

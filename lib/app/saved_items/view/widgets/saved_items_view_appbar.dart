@@ -6,10 +6,11 @@ import 'package:google_fonts/google_fonts.dart';
 class SavedItemViewAppBar extends StatelessWidget
     implements PreferredSizeWidget {
   const SavedItemViewAppBar({
-    super.key, required this.itemsCount,
+    super.key, required this.itemsCount, required this.isInBottomBar,
   });
 
   final int itemsCount;
+  final bool isInBottomBar;
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +42,9 @@ class SavedItemViewAppBar extends StatelessWidget
           ),
         ],
       ),
-      leading: GestureDetector(
+      leading:isInBottomBar ?null: GestureDetector(
         onTap: () {
-          // Navigator.pop(context);
+          Navigator.pop(context);
         },
         child: SvgPicture.asset(
           "assets/svgs/back_arrow_icon.svg",

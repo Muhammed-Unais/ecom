@@ -5,8 +5,10 @@ import 'package:google_fonts/google_fonts.dart';
 
 class PrdouctsAppBar extends StatelessWidget implements PreferredSizeWidget {
   const PrdouctsAppBar({
-    super.key,
+    super.key, required this.isInBottomBar,
   });
+
+  final bool isInBottomBar;
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +40,9 @@ class PrdouctsAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ],
       ),
-      leading: GestureDetector(
+      leading: isInBottomBar ? null: GestureDetector(
         onTap: () {
-          // Navigator.pop(context);
+          Navigator.pop(context);
         },
         child: SvgPicture.asset(
           "assets/svgs/back_arrow_icon.svg",

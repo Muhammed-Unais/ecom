@@ -41,6 +41,7 @@ class HomeBannerWidget extends StatelessWidget {
                       FancyShimmerImage(
                         imageUrl: AppUrl.bannerImageSchema + banner!.image,
                         width: size.width,
+                        height: size.height *0.45,
                         boxFit: BoxFit.fill,
                         errorWidget: Image.asset(
                           "assets/images/no_image.jpg",
