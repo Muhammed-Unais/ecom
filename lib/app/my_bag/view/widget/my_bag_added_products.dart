@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class CartAddedProducts extends StatelessWidget {
-  const CartAddedProducts({
+class MyBagAddedProducts extends StatelessWidget {
+  const MyBagAddedProducts({
     super.key,
     required this.size,
   });
@@ -21,16 +21,18 @@ class CartAddedProducts extends StatelessWidget {
       myBagItemsProvider.getAllBagItems();
     });
     return myBagItemsProvider.myBagitems.isEmpty
-        ? Center(
-            child: Text(
-              "It's empty in here",
-              style: GoogleFonts.rubik(
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-                color: AppColors.primarySeed,
+        ? Expanded(
+          child: Center(
+              child: Text(
+                "It's empty in here",
+                style: GoogleFonts.rubik(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.primarySeed,
+                ),
               ),
             ),
-          )
+        )
         : Expanded(
             child: ListView.separated(
               padding: const EdgeInsets.only(top: 20),

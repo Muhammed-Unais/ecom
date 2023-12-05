@@ -1,4 +1,4 @@
-import 'package:ecom/app/my_bag/view/widget/cart_added_products.dart';
+import 'package:ecom/app/my_bag/view/widget/my_bag_added_products.dart';
 import 'package:ecom/app/my_bag/view/widget/my_bag_view_appbar.dart';
 import 'package:ecom/app/my_bag/view/widget/total_price_and_checkout_button.dart';
 import 'package:flutter/material.dart';
@@ -14,14 +14,10 @@ class MyBagView extends StatelessWidget {
       appBar: const MyBagViewAppBar(),
       body: Column(
         children: [
-          CartAddedProducts(size: size),
+          MyBagAddedProducts(size: size),
           TotalPriceAndCheckoutButton(size: size)
         ],
       ),
     );
   }
 }
-
-
-
-

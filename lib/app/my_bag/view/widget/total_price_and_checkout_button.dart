@@ -1,3 +1,4 @@
+import 'package:ecom/app/checkout/view/checkout_view.dart';
 import 'package:ecom/app/my_bag/view_model/my_bag_view_model.dart';
 import 'package:ecom/res/constants/app_colors.dart';
 import 'package:ecom/res/widgets/elavated_button_without_icon.dart';
@@ -15,7 +16,7 @@ class TotalPriceAndCheckoutButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final total= context.watch<MyBagViewModel>().getTotal();
+    final total = context.watch<MyBagViewModel>().getTotal();
     return Container(
       padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
       decoration: const BoxDecoration(
@@ -85,7 +86,18 @@ class TotalPriceAndCheckoutButton extends StatelessWidget {
           ElevatedButtonWithoutIcon(
             size: size,
             buttonChildName: "CHECKOUT",
-            onPressed: () {},
+            onPressed: () {
+              context.read<MyBagViewModel>().clearCart().then((value) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return const CheckoutView();
+                    },
+                  ),
+                );
+              });
+            },
           ),
           const SizedBox(
             height: 10,
